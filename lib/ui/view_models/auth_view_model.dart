@@ -19,7 +19,7 @@ class AuthViewModel extends ChangeNotifier {
       },
       (success) {
         log("logged in");
-        _snackBar.showCustomSnackBar(context, success.message, false);
+        _snackBar.showCustomSnackBar(context, success.message!, false);
       },
     );
     notifyListeners();
@@ -34,7 +34,7 @@ class AuthViewModel extends ChangeNotifier {
       },
       (success) {
         log("logged out");
-        _snackBar.showCustomSnackBar(context, success.message, false);
+        _snackBar.showCustomSnackBar(context, success.message!, false);
       },
     );
     notifyListeners();

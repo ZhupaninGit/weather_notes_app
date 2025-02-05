@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_notes_app/ui/screens/home_screen.dart';
+import 'package:weather_notes_app/ui/screens/home/home_screen.dart';
 import 'package:weather_notes_app/ui/view_models/auth_view_model.dart';
 
 class AuthScreen extends StatelessWidget {

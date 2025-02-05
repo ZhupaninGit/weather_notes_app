@@ -1,7 +1,7 @@
 class Success {
   final Object? result;
-  final String message;
+  final String? message;
 
-  Success({required this.result ,required this.message});
+  Success({this.result ,this.message});
 
 }
