@@ -17,7 +17,8 @@ class WeatherNotesApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => WeatherViewModel(),
-        )
+        ),
+ 
       ],
       child: MaterialApp(
         theme: AppTheme.theme,

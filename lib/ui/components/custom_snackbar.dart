@@ -9,25 +9,27 @@ class CustomSnackBar {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: isError ? Color(0xFFFF6E4E) : Color.fromARGB(255, 78, 255, 161),
+        backgroundColor: isError ? const Color(0xFFFF6E4E) : Theme.of(context).colorScheme.primary,
         content: Row(
           children: [
-            Icon(isError ? Icons.error_rounded : Icons.done_rounded),
-            SizedBox(width: 12),
+            Icon(isError ?  Icons.error_rounded : Icons.done_rounded),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 message,
-                style: TextStyle(color: Colors.black45),
+                style: const TextStyle(color: Color.fromARGB(115, 255, 255, 255)),
                 softWrap: true, 
                 overflow: TextOverflow.fade, 
               ),
             ),
           ],
         ),
+        showCloseIcon: true,
+        closeIconColor: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius:  BorderRadius.circular(14),
         ),
-        behavior: SnackBarBehavior.floating,
+        behavior: SnackBarBehavior.fixed,
       ),
     );
   }

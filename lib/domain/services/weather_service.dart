@@ -21,7 +21,7 @@ class WeatherService {
       return Right(Success(result: currentWeahter));
     }
     on ClientException{
-      return Left(Failure(errorMessage: "Failed to get current weather.Please,check your internet connection and try again."));
+      return Left(Failure(errorMessage: "Failed to get current weather. Please,check your internet connection and try again."));
     }
     catch(e){
       return Left(Failure(errorMessage:e.toString().replaceAll("Exception:", "")));

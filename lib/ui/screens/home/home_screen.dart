@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_notes_app/ui/screens/home/widgets/colapsed_weather_widget.dart';
-import 'package:weather_notes_app/ui/screens/home/widgets/expanded_weather_widget.dart';
+import 'package:weather_notes_app/ui/screens/home/notes_widgets/create_or_update_note_widget.dart';
+import 'package:weather_notes_app/ui/screens/home/notes_widgets/notes_list_widget.dart';
+import 'package:weather_notes_app/ui/screens/home/weather_widgets/colapsed_weather_widget.dart';
+import 'package:weather_notes_app/ui/screens/home/weather_widgets/expanded_weather_widget.dart';
 import 'package:weather_notes_app/ui/view_models/auth_view_model.dart';
+import 'package:weather_notes_app/ui/view_models/notes_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _handleScroll() {
     const collapsedBarHeight = 60.0;
     const expandedBarHeight = 220.0;
-    final needToCollapse = _scrollController.offset >
-        (expandedBarHeight - collapsedBarHeight);
-    
+    final needToCollapse =
+        _scrollController.offset > (expandedBarHeight - collapsedBarHeight);
+
     if (needToCollapse != _isCollapsed) {
       setState(() => _isCollapsed = needToCollapse);
     }
@@ -43,15 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add_outlined),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => CreateOrUpdateNoteScreen()));
+          },
+        ),
         body: CustomScrollView(
           controller: _scrollController,
           slivers: [
             _buildSliverAppBar(context),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(title: Text("Index $index")),
-                childCount: 20,
-              ),
+            ChangeNotifierProvider(
+              create: (_) => NotesViewModel(),
+              child: NotesListWidget(),
             ),
           ],
         ),
@@ -80,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       flexibleSpace: const FlexibleSpaceBar(
-        background:  ExpandedWeatherWidget(),
+        background: ExpandedWeatherWidget(),
       ),
     );
   }

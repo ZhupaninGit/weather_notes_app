@@ -146,7 +146,7 @@ class _AdditionalWeatherConditions extends StatelessWidget {
           ),
           const SizedBox(height: 22),
           _WeatherDetailsComponent(
-            value: weather.humidity.toDouble(),
+            value: weather.humidity,
             icon: Icons.water_drop_outlined,
             text: "Humidity ",
             metric: "%",
@@ -164,7 +164,7 @@ class _WeatherDetailsComponent extends StatelessWidget {
       required this.text,
       required this.metric});
 
-  final double value;
+  final num value;
   final IconData icon;
   final String text;
   final String metric;

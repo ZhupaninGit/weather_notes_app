@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:weather_notes_app/domain/services/auth_service.dart';
 import 'package:weather_notes_app/ui/components/custom_snackbar.dart';
@@ -14,11 +12,9 @@ class AuthViewModel extends ChangeNotifier {
     final result = await _authService.signInWithGoogle();
     result.fold(
       (error) {
-        log(error.errorMessage);
         _snackBar.showCustomSnackBar(context, error.errorMessage, true);
       },
       (success) {
-        log("logged in");
         _snackBar.showCustomSnackBar(context, success.message!, false);
       },
     );
@@ -29,11 +25,9 @@ class AuthViewModel extends ChangeNotifier {
     final result = await _authService.signOutUser();
     result.fold(
       (error) {
-        log(error.errorMessage);
         _snackBar.showCustomSnackBar(context, error.errorMessage, true);
       },
       (success) {
-        log("logged out");
         _snackBar.showCustomSnackBar(context, success.message!, false);
       },
     );

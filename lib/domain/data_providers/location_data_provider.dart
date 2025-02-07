@@ -17,7 +17,7 @@ class LocationDataProvider {
 
     if (locationPermission == LocationPermission.deniedForever) {
       throw Exception(
-          "Location permission is denied forever.You must enable location permission in the app settings and try again.");
+          "Location permission is denied forever. You must enable location permission in the app settings and try again.");
     } else if (locationPermission == LocationPermission.denied) {
       locationPermission = await Geolocator.requestPermission();
       if (locationPermission == LocationPermission.deniedForever) {

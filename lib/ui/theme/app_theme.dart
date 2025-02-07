@@ -5,7 +5,7 @@ abstract class AppTheme {
   static final theme = ThemeData(
     textTheme: GoogleFonts.manropeTextTheme(),
     primaryColor: const Color(0xFF415A77),
-    scaffoldBackgroundColor: const Color(0xFFE0E1DD),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 241, 241, 241),
     colorScheme: const ColorScheme(
       primary: Color(0xFF415A77),
       secondary: Color(0xFF778DA9),
@@ -26,5 +26,9 @@ abstract class AppTheme {
       buttonColor: Color(0xFF778DA9),
       textTheme: ButtonTextTheme.primary,
     ),
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      
+    )
   );
 }
