@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_notes_app/domain/models/weather.dart';
+import 'package:weather_notes_app/ui/screens/location_select/location_select_screen.dart';
+import 'package:weather_notes_app/ui/view_models/location_view_model.dart';
 import 'package:weather_notes_app/ui/view_models/weather_view_model.dart';
 
 class ExpandedWeatherWidget extends StatelessWidget {
@@ -74,18 +76,31 @@ class _MainWeatherConditions extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.location_on_outlined,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-            SizedBox(width: 5),
             Flexible(
-              child: Text(
-                weather.city,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onPrimary),
+              child: TextButton.icon(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ChangeNotifierProvider(
+                      create: (_) => PlaceViewModel(),
+                      child: LocationSelectScreen(),
+                    ),
+                  ),
+                ),
+                style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll<Color>(
+                        Theme.of(context).colorScheme.primary)),
+                label: Text(
+                  weather.city,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                icon: Icon(
+                  Icons.location_on_outlined,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ),
           ],
@@ -201,15 +216,28 @@ class _ErrorWidget extends StatelessWidget {
           height: 15,
         ),
         OutlinedButton.icon(
-          onPressed: () async {
-            await viewModel.getCurrentWeather();
-          },
+          onPressed: viewModel.updateWeather,
           label: const Text(
             "Retry",
             style: textStyle,
           ),
           icon: const Icon(Icons.replay_rounded),
-        )
+        ),
+        OutlinedButton.icon(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => ChangeNotifierProvider(
+                create: (_) => PlaceViewModel(),
+                child: LocationSelectScreen(),
+              ),
+            ),
+          ),
+          label: const Text(
+            "Change location",
+            style: textStyle,
+          ),
+          icon: const Icon(Icons.location_off_outlined),
+        ),
       ],
     );
   }

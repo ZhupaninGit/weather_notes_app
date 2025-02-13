@@ -55,6 +55,7 @@ class NotesService {
       if (!doc.exists) {
         return Left(Failure(errorMessage: "Note not found. Unable to delete."));
       }
+      
       await _notes.doc(docId).delete();
       return Right(Success(message: "Note deleted successfully."));
     } catch (e) {

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_notes_app/domain/models/note.dart';
 import 'package:weather_notes_app/domain/services/notes_service.dart';

@@ -16,6 +16,7 @@ class CreateOrUpdateNoteScreen extends StatefulWidget {
 class CreateOrUpdateNoteScreenState extends State<CreateOrUpdateNoteScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+
   final _model = NotesViewModel();
 
   @override
@@ -32,7 +33,8 @@ class CreateOrUpdateNoteScreenState extends State<CreateOrUpdateNoteScreen> {
     final description = _descriptionController.text;
 
     if (title.isEmpty && description.isEmpty) {
-      CustomSnackBar().showCustomSnackBar(context, "Please,provide some title or body.", true);
+      CustomSnackBar().showCustomSnackBar(
+          context, "Please,provide some title or body.", true);
       return;
     }
 

@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
       "Thunderstorm" => Icon(Icons.flash_on_outlined),
       "Drizzle" => Icon(Icons.grain_outlined),
       "Mist" => Icon(Icons.foggy),
+      "Haze" => Icon(Icons.dirty_lens),
+      "Fog" => Icon(Icons.foggy),
       _ => Icon(Icons.help_outline),
     };
   }
@@ -17,7 +19,7 @@ class Weather {
   String city;
   String weatherConditions;
   double temperature;
-  int humidity;
+  num humidity;
   double windSpeed;
   Icon icon;
 
