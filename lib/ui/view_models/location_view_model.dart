@@ -19,6 +19,7 @@ class PlaceViewModel extends ChangeNotifier {
   List<Location>? get predictedLocations => _predictedLocation;
 
   Future<void> updateLocationPredictions(String input) async {
+    
     if (input.isEmpty) {
       _predictedLocation = null;
       _errorMessage = null;

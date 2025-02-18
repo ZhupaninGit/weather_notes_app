@@ -55,31 +55,38 @@ class _ListOfPredictedPlaces extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<PlaceViewModel>();
     final errorMessage = viewModel.errorMessage;
+
+    if (errorMessage != null) {
+      return Text(errorMessage);
+    }
+
     final predictedPlaces = viewModel.predictedLocations;
-    return errorMessage != null
-        ? Text(errorMessage)
-        : predictedPlaces == null
-            ? const Text("Start typing to find your location...")
-            : predictedPlaces.isEmpty
-                ? const Text("No results.")
-                : Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 3.0),
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemCount: predictedPlaces.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(predictedPlaces[index].description,
-                                style: Theme.of(context).textTheme.bodyMedium),
-                            onTap: () => context
-                                .read<PlaceViewModel>()
-                                .getCoordinatesAndSetSelectedLocation(
-                                    predictedPlaces[index], context),
-                          );
-                        },
-                      ),
-                    ),
+
+    if (predictedPlaces == null) {
+      return const Text("Start typing to find your location...");
+    }
+    if(predictedPlaces.isEmpty){
+      return const Text("No results.");
+    }
+
+    return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3.0),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: predictedPlaces.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(predictedPlaces[index].description,
+                        style: Theme.of(context).textTheme.bodyMedium),
+                    onTap: () => context
+                        .read<PlaceViewModel>()
+                        .getCoordinatesAndSetSelectedLocation(
+                            predictedPlaces[index], context),
                   );
+                },
+              ),
+            ),
+          );
   }
 }
